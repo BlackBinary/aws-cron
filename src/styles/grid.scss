@@ -2,25 +2,25 @@ body {
 	margin: 40px;
 }
 
-.sidebar {
+:global(.sidebar) {
 	grid-area: sidebar;
 }
 
-.content {
+:global(.content) {
 	grid-area: content;
 }
 
-.header {
+:global(.header) {
 	grid-area: header;
 	background-color: #999;
 }
 
-.footer {
+:global(.footer) {
 	grid-area: footer;
 	background-color: #999;
 }
 
-.wrapper {
+:global(.wrapper) {
 	background-color: #fff;
 	color: #444;
 	display: grid;
@@ -28,21 +28,21 @@ body {
 	grid-template-areas: "header" "sidebar" "content" "footer";
 }
 
-.box {
+:global(.box) {
 	background-color: #444;
 	color: #fff;
 	padding: 10px;
 }
 
 @media only screen and (min-width: 500px) {
-	.wrapper {
+	:global(.wrapper) {
 		grid-template-columns: 20% auto;
 		grid-template-areas: "header   header" "sidebar  content" "footer   footer";
 	}
 }
 
 @media only screen and (min-width: 600px) {
-	.wrapper {
+	:global(.wrapper) {
 		grid-gap: 20px;
 		grid-template-columns: 120px auto 120px;
 		grid-template-areas: "header  header  header" "sidebar content content" "footer  footer  footer";
