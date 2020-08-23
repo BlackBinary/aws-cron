@@ -1,7 +1,4 @@
 <script lang="ts">
-import { create_out_transition } from "svelte/internal";
-
-
     let cron: string = '* * * * * *';
 
     $: [
@@ -23,7 +20,7 @@ import { create_out_transition } from "svelte/internal";
 </main>
 
 <style lang="scss">
- main {
-   text-align: center;
- }
+main {
+text-align: center;
+}
 </style>
