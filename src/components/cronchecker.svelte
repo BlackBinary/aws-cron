@@ -13,8 +13,20 @@
     function formatTime(value) {
         return (`0${value}`).slice(-2);
     }
+    
+    function selectDay(value) {
+      const days = ['Monday', 'Thuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      return days[value];
+    }
+    
+    function selectMonth(value) {
+      const months = ['January', 'Februari', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return months[value];
+    }
 
     $: timevalue = hour && hour !== '*' ? `At ${formatTime(hour)}:${formatTime(minute)}` : `At minute ${minute}`;
+    $: dayvalue = dayOfWeek && dayOfWeek !== '*' ? `on ${selectDay(dayOfWeek)}` : ``;
+    $: monthvalue = month && month !== '*' ? `in ${selectMonth(month)}` : ``;
 
     let type = 'MINUTES';
     function caretPosition(e) {
@@ -100,13 +112,13 @@
 </script>
 
 <main>
-    {timevalue}<br>`
-    every minute at {minute}<br>
+    <div class="human-readable">{timevalue} {dayvalue} {monthvalue}</div>
+    <!-- every minute at {minute}<br>
     every hour at {hour}<br>
     every {dayOfWeek} of the week<br>
     every {month} month<br>
     every {dayOfMonth} of the month<br>
-    every {year}th year<br>
+    every {year}th year<br> -->
     <input bind:value={cron} on:keyup={(e) => caretPosition(e)} on:click={(e) => caretPosition(e)}>
     <div class="types">
         <div class="type">
@@ -182,7 +194,8 @@ input {
 
 .type-specs {
   width: 100%;
-  padding: 50px;
+  max-width: 550px;
+  margin: 50px auto;
   box-sizing: border-box;
   font-size: 13px;
 
@@ -197,7 +210,11 @@ input {
       display: flex;
       width: 100%;
       line-height: 35px;
-      border-bottom: 1px dashed #f5f5f5;
+      border-bottom: 1px dashed #f1f1f1;
+
+      &:nth-child(odd) {
+        background: #f5f5f5;
+      }
     }
 
     .char {
@@ -215,6 +232,12 @@ input {
       text-align: left;
     }
   }  
+}
+
+.human-readable {
+  display: block; 
+  margin-bottom: 20px;
+  font-size: 30px;
 }
 
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <div class="box header">
-    Hi components
+    <img src="./assets/logo.png" />
 </div>
 
 <style lang="scss">

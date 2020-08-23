@@ -10,7 +10,7 @@ import Cronchecker from './components/cronchecker.svelte';
 		<div class="box content">
 			<Cronchecker />
 		</div>
-		<div class="box footer">Footer</div>
+		<div class="box footer">C-ron & D-velop</div>
 	</div>
 </main>
 
@@ -19,5 +19,7 @@ import Cronchecker from './components/cronchecker.svelte';
   
   .footer {
     text-align: center;
+    font-size: 10px;
+    font-style: italic;
   }
 </style>
