@@ -15,6 +15,88 @@
     }
 
     $: timevalue = hour && hour !== '*' ? `At ${formatTime(hour)}:${formatTime(minute)}` : `At minute ${minute}`;
+
+    let type = 'MINUTES';
+    function caretPosition(e) {
+      let caretPosition = e.target.selectionStart;
+
+      if(caretPosition <= minute.length) {
+        type = 'MINUTES';
+      } else if (caretPosition >= (minute.length + 1) && caretPosition <= (hour.length + minute.length + 1)) {
+        type = 'HOURS';
+      } else if (caretPosition >= (hour.length + minute.length + 2) && caretPosition <= (hour.length + minute.length + dayOfWeek.length + 2)) {
+        type = 'DAY-OF-WEEK';
+      } else if (caretPosition >= (hour.length + minute.length + dayOfWeek.length + 3) && caretPosition <= (hour.length + minute.length + dayOfWeek.length + month.length + 3)) {
+        type = 'MONTH';
+      } else if (caretPosition >= (hour.length + minute.length + dayOfWeek.length + month.length + 4) && caretPosition <= (hour.length + minute.length + dayOfWeek.length + month.length + dayOfMonth.length + 4)) {
+        type = 'DAY-OF-MONTH';
+      } else if (caretPosition >= (hour.length + minute.length + dayOfWeek.length + month.length + dayOfMonth.length + 5) && caretPosition <= (hour.length + minute.length + dayOfWeek.length + month.length + dayOfMonth.length + year.length + 5)) {
+        type = 'YEAR';
+      }
+    };
+
+    let specList: array = [
+      {
+        char: '*',
+        desc: 'any value',
+        type: ['MINUTES', 'HOURS', 'DAY-OF-WEEK', 'MONTH', 'DAY-OF-MONTH', 'YEAR'],
+      },
+      {
+        char: ',',
+        desc: 'value list separator',
+        type: ['MINUTES', 'HOURS', 'DAY-OF-WEEK', 'MONTH', 'DAY-OF-MONTH', 'YEAR'],
+      },
+      {
+        char: '-',
+        desc: 'range of values',
+        type: ['MINUTES', 'HOURS', 'DAY-OF-WEEK', 'MONTH', 'DAY-OF-MONTH', 'YEAR'],
+      },
+      {
+        char: '/',
+        desc: 'step values',
+        type: ['MINUTES', 'HOURS', 'DAY-OF-WEEK', 'MONTH', 'DAY-OF-MONTH', 'YEAR'],
+      },
+      {
+        char: '0-59',
+        desc: 'Allowed Values',
+        type: ['MINUTES'],
+      },
+      {
+        char: '0-23',
+        desc: 'Allowed Values',
+        type: ['HOURS'],
+      },
+      {
+        char: '1-31',
+        desc: 'Allowed Values',
+        type: ['DAY-OF-MONTH'],
+      },
+      {
+        char: '1-12',
+        desc: 'Allowed Values',
+        type: ['MONTH'],
+      },
+      {
+        char: 'JAN-DEC',
+        desc: 'Alternative Single Values',
+        type: ['MONTH'],
+      },
+      {
+        char: '0-6',
+        desc: 'Allowed Values',
+        type: ['DAY-OF-WEEK'],
+      },
+      {
+        char: 'SUN-SAT',
+        desc: 'Alternative Single Values',
+        type: ['DAY-OF-WEEK'],
+      },
+      {
+        char: '7',
+        desc: 'Sunday (non standard)',
+        type: ['DAY-OF-WEEK'],
+      },
+    ];
 </script>
 
 <main>
@@ -25,30 +107,47 @@
     every {month} month<br>
     every {dayOfMonth} of the month<br>
     every {year}th year<br>
-    <input bind:value={cron}>
+    <input bind:value={cron} on:keyup={(e) => caretPosition(e)} on:click={(e) => caretPosition(e)}>
     <div class="types">
         <div class="type">
-          MINUTES
+          <span class="{type === 'MINUTES' ? 'active' : ''}">MINUTES</span>
         </div>
         <div class="type">
-          HOURS
+          <span class="{type === 'HOURS' ? 'active' : ''}">HOURS</span>
         </div>
         <div class="type">
-          DAY OF WEEK
+          <span class="{type === 'DAY-OF-WEEK' ? 'active' : ''}">DAY OF WEEK</span>
+          
         </div>
         <div class="type">
-          MONTH
+          <span class="{type === 'MONTH' ? 'active' : ''}">MONTH</span>
         </div>
         <div class="type">
-          DAY OF MONTH
+          <span class="{type === 'DAY-OF-MONTH' ? 'active' : ''}"> DAY OF MONTH</span>
         </div>
         <div class="type">
-          YEAR
+          <span class="{type === 'YEAR' ? 'active' : ''}">YEAR</span>
         </div>
+    </div>
+    <div class="type-specs">
+        <ul>
+          {#each specList as item}
+            {#if item.type.includes(type)}
+              <li>
+                <span class="char">{item.char}</span>
+                <span class="desc">{item.desc}</span>
+              </li>
+            {/if}
+          {/each}
+        </ul> 
     </div>
 </main>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
 main {
   text-align: center;
 }
@@ -63,4 +162,59 @@ input {
   outline: none;
   color: #aeaeae;
 }
+
+.types {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .type {
+    padding: 0 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    .active {
+      color:#008080;
+      font-weight: bold;
+      transition: all 0.2 ease;
+    }
+  }
+}
+
+.type-specs {
+  width: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+  font-size: 13px;
+
+  ul {
+    list-style: none;
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: flex;
+      width: 100%;
+      line-height: 35px;
+      border-bottom: 1px dashed #f5f5f5;
+    }
+
+    .char {
+      color: #008080;
+      display: block;
+      width: 50%;
+      padding-right: 15px;
+      text-align: right;
+    }
+    
+    .desc {
+      display: block;
+      width: 50%;
+      padding-left: 15px;
+      text-align: left;
+    }
+  }  
+}
+
 </style>
