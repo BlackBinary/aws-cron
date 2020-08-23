@@ -2,9 +2,10 @@
 
 </script>
 
-<div class="box header">
-    Hi components
-</div>
+<main>
+    
+</main>
 
 <style lang="scss">
+    
 </style>
