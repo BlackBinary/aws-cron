@@ -21,6 +21,15 @@
 
 <style lang="scss">
 main {
-text-align: center;
+  text-align: center;
+}
+
+input {
+  border-radius: 50px;
+  line-height: 70px;
+  font-size: 30px;
+  padding: 0 30px;
+  letter-spacing: 3px;
+  text-align: center;
 }
 </style>
