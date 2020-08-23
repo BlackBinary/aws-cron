@@ -1,11 +1,12 @@
 <script lang="ts">
     let cron: string = '* * * * * *';
 
-    $: minute = cron.split(" ")[0];
-    $: hour = cron.split(" ")[1];
-    $: dayOfWeek = cron.split(" ")[2];
-    $: month = cron.split(" ")[3];
-    $: dayOfMonth = cron.split(" ")[4];
+    $: splitted = cron.split(" ");
+    $: minute = splitted[0];
+    $: hour = splitted[1];
+    $: dayOfWeek = splitted[2];
+    $: month = splitted[3];
+    $: dayOfMonth = splitted[4];
 </script>
 
 <main>
