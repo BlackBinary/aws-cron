@@ -1,11 +1,16 @@
 <script lang="ts">
+import { create_out_transition } from "svelte/internal";
+
+
     let cron: string = '* * * * * *';
 
-    $: minute = cron.split(" ")[0];
-    $: hour = cron.split(" ")[1];
-    $: dayOfWeek = cron.split(" ")[2];
-    $: month = cron.split(" ")[3];
-    $: dayOfMonth = cron.split(" ")[4];
+    $: [
+        minute,
+        hour,
+        dayOfWeek,
+        month,
+        dayOfMonth,
+    ] = cron.split(' ');
 </script>
 
 <main>
