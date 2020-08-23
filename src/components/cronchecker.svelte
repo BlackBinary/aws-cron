@@ -19,6 +19,26 @@
     every {dayOfMonth} of the month<br>
     every {year}th year<br>
     <input bind:value={cron}>
+    <div class="types">
+        <div class="type">
+          MINUTES
+        </div>
+        <div class="type">
+          HOURS
+        </div>
+        <div class="type">
+          DAY OF WEEK
+        </div>
+        <div class="type">
+          MONTH
+        </div>
+        <div class="type">
+          DAY OF MONTH
+        </div>
+        <div class="type">
+          YEAR
+        </div>
+    </div>
 </main>
 
 <style lang="scss">
@@ -33,5 +53,7 @@ input {
   padding: 0 30px;
   letter-spacing: 3px;
   text-align: center;
+  outline: none;
+  color: #aeaeae;
 }
 </style>
