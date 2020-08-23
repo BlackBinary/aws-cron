@@ -7,6 +7,7 @@
         dayOfWeek,
         month,
         dayOfMonth,
+        year,
     ] = cron.split(' ');
 </script>
 
@@ -16,6 +17,7 @@
     every {dayOfWeek} of the week<br>
     every {month} month<br>
     every {dayOfMonth} of the month<br>
+    every {year}th year<br>
     <input bind:value={cron}>
 </main>
 
