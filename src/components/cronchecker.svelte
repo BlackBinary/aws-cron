@@ -8,5 +8,7 @@
 </main>
 
 <style lang="scss">
-    
+ main {
+   text-align: center;
+ }
 </style>

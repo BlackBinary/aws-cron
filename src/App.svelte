@@ -7,10 +7,6 @@ import Cronchecker from './components/cronchecker.svelte';
 <main>
 	<div class="wrapper">
 		<Header />
-		<!-- <div class="box header">
-			Hi
-		</div> -->
-		<div class="box sidebar">Sidebar</div>
 		<div class="box content">
 			<Cronchecker />
 		</div>
@@ -19,5 +15,9 @@ import Cronchecker from './components/cronchecker.svelte';
 </main>
 
 <style global lang="scss">
-	@import './styles/grid';
+  @import './styles/grid';
+  
+  .footer {
+    text-align: center;
+  }
 </style>

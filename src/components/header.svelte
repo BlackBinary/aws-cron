@@ -7,4 +7,7 @@
 </div>
 
 <style lang="scss">
+  .header {
+    text-align: center;
+  }
 </style>
